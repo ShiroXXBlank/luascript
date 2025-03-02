@@ -58,7 +58,7 @@ function teleportToOtherServer(player)
 
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua'))()")
 
-	ts:TeleportToPlaceInstance(game.PlaceId, tbl.data[1]["id"], player) 
+	ts:TeleportToPlaceInstance(game.PlaceId, tbl.data[math.random(5, #tbl]["id"], player) 
 end
 
 function distance(obj1, obj2)
