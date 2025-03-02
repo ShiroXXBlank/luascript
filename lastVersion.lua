@@ -20,6 +20,8 @@ local resourcePositions = {}
 function teleportToOtherServer(player)
 	--local id = "cbff7bf6-1f90-47a3-b3f7-51d9d6cc67e1"
 
+	tweenTeleport(Vector3.new(-361, 375, -628), 100)
+
 	local jsonHTTP = game:HttpGet("https://games.roblox.com/v1/games/99995671928896/servers/public?limit=100&excludeFullGames=true")
 
 	local tbl = JSON:decode(jsonHTTP)
@@ -28,8 +30,6 @@ function teleportToOtherServer(player)
 		task.wait(20)
 		teleportToOtherServer(player)
 	end
-
-	tweenTeleport(Vector3.new(-361, 375, -628), 100)
 
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua'))()")
 
