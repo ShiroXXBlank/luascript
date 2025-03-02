@@ -92,7 +92,7 @@ function tweenTeleport(position, speed)
 	print("Teleporting Done!")
 end
 
-function farm(resource)
+function harvest(resource)
     local args = {
         [1] = {
             ["player"] = game:GetService("Players").LocalPlayer,
@@ -119,7 +119,7 @@ function farmResource(resource)
 	-- Teleport
 	tweenTeleport(resourcePosition, 100)
 	if (resource:FindFirstChildOfClass("ProximityPrompt") ~= nil) then
-		farm(resource)
+		harvest(resource)
 	end
 
 	--Hover While Farming
@@ -164,27 +164,8 @@ function toggleCO()
 	end
 end
 
-if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
-    local args = {
-        [1] = {
-            ["config"] = "start_screen"
-        }
-    }
-
-    game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit continue button
-
-    args = {
-        [1] = {
-            ["config"] = "slots",
-            ["slot"] = "Slot_1"
-        }
-    }
-    
-    task.wait(5)
-
-    game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit Character Slot
-else
-    local resource = "Platinum"
+function autoFarm(resource) 
+	local resource = "Platinum"
     resources = getResources(resource)
 
     if (tableLength(resources) == 0) then
@@ -205,4 +186,31 @@ else
 
         teleportToOtherServer(localPlayer)
     end
+end
+
+if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
+    local args = {
+        [1] = {
+            ["config"] = "start_screen"
+        }
+    }
+
+    game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit continue button
+
+    args = {
+        [1] = {
+            ["config"] = "slots",
+            ["slot"] = "Slot_1"
+        }
+    }
+    
+    task.wait(5)
+
+    game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit Character Slot
+
+    task:wait(5)
+
+    farm("Platinum")
+else
+    farm("Platinum")
 end
