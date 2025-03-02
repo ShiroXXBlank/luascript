@@ -29,7 +29,7 @@ function teleportToOtherServer(player)
 		teleportToOtherServer(player)
 	end
 
-	tweenTeleport(Vector3.new(-361, 375, -628))
+	tweenTeleport(Vector3.new(-361, 375, -628), 100)
 
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua'))()")
 
