@@ -179,6 +179,8 @@ if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
             ["slot"] = "Slot_1"
         }
     }
+    
+    task.wait(5)
 
     game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit Character Slot
 else
