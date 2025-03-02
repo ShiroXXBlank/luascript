@@ -211,7 +211,7 @@ if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
 
     game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit Character Slot
 
-    task.wait(10)
+    task.wait(15)
 
     local resource = "Platinum"
     resources = getResources(resource)
