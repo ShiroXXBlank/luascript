@@ -47,7 +47,7 @@ function teleportToOtherServer(player)
 
 	tweenTeleport(Vector3.new(-361, 375, -628), 100)
 
-	local jsonHTTP = game:HttpGet("https://games.roblox.com/v1/games/99995671928896/servers/public?limit=100&excludeFullGames=true")
+	local jsonHTTP = game:HttpGet("https://games.roblox.com/v1/games/99995671928896/servers/public?limit=100&excludeFullGames=true&sortOrder=1")
 
 	local tbl = JSON:decode(jsonHTTP)
 
