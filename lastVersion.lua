@@ -112,7 +112,7 @@ function farmResource(resource)
 		return
 	end
 
-	if (resourceName == "Platinum" and resourcePosition.Y < 200 and math.floor(resourcePosition.Y) ~= 168) then
+	if (resourceName == "Platinum" and resourcePosition.Y < 200 or math.floor(resourcePosition.Y) ~= 168) then
 		resourcePosition = Vector3.new(resourcePosition.X, resourcePosition.Y - 3, resourcePosition.Z)
 	end
 
@@ -164,30 +164,6 @@ function toggleCO()
 	end
 end
 
-function autoFarm(resource) 
-	local resource = "Platinum"
-    resources = getResources(resource)
-
-    if (tableLength(resources) == 0) then
-        print("NO ORE JOINING DIFFERENT SERVER")
-        teleportToOtherServer(localPlayer)
-    else
-        toggleCO()
-
-        for _, v in pairs(resources) do
-            print(v)
-            farmResource(v)
-            resources = getResources(resource)
-        end
-
-        print("finished mining proceeding to hop servers")
-
-        toggleCO()
-
-        teleportToOtherServer(localPlayer)
-    end
-end
-
 if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
     local args = {
         [1] = {
@@ -208,9 +184,49 @@ if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
 
     game:GetService("Players").LocalPlayer.ClientNetwork:WaitForChild("MenuOptions"):FireServer(unpack(args)) -- Hit Character Slot
 
-    task:wait(5)
+    task.wait(5)
 
-    farm("Platinum")
+    local resource = "Platinum"
+    resources = getResources(resource)
+
+    if (tableLength(resources) == 0) then
+        print("NO ORE JOINING DIFFERENT SERVER")
+        teleportToOtherServer(localPlayer)
+    else
+        toggleCO()
+
+        for _, v in pairs(resources) do
+            print(v)
+            farmResource(v)
+            resources = getResources(resource)
+        end
+
+        print("finished mining proceeding to hop servers")
+
+        toggleCO()
+
+        teleportToOtherServer(localPlayer)
+    end
 else
-    farm("Platinum")
+    local resource = "Platinum"
+    resources = getResources(resource)
+
+    if (tableLength(resources) == 0) then
+        print("NO ORE JOINING DIFFERENT SERVER")
+        teleportToOtherServer(localPlayer)
+    else
+        toggleCO()
+
+        for _, v in pairs(resources) do
+            print(v)
+            farmResource(v)
+            resources = getResources(resource)
+        end
+
+        print("finished mining proceeding to hop servers")
+
+        toggleCO()
+
+        teleportToOtherServer(localPlayer)
+    end
 end
