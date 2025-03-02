@@ -7,6 +7,7 @@ print("Loaded")
 
 local workspace = game.Workspace
 local tweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 local JSON = loadstring(game:HttpGet("https://gist.githubusercontent.com/lvzixun/80e5b900b82059ebf5d7/raw/4e6ce4f28fef30bf32e485996892dd50ad2fa944/json.lua"))()
 
 local players = game:GetService("Players")
