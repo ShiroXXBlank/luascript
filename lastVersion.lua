@@ -135,8 +135,6 @@ function farmResource(resource)
 	local resourceName = resource.Name
 	local resourcePosition = getPosition(resource)
 
-	noclip()
-
 	if (resource:FindFirstChildOfClass("ProximityPrompt") == nil) then
 		return
 	end
@@ -162,8 +160,6 @@ function farmResource(resource)
 	if (resource:FindFirstChildOfClass("ProximityPrompt") ~= nil) then
 		farmResource(resource)
 	end
-
-	clip()
 end
 
 function clickRandomServer()
