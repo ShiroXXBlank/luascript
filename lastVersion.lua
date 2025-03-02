@@ -221,7 +221,6 @@ if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
         teleportToOtherServer(localPlayer)
     else
         toggleCO()
-	noclip()
 
         for _, v in pairs(resources) do
             print(v)
@@ -232,8 +231,6 @@ if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
         print("finished mining proceeding to hop servers")
 
         toggleCO()
-
-	clip()
 
         teleportToOtherServer(localPlayer)
     end
@@ -247,8 +244,6 @@ else
     else
         toggleCO()
 
-	noclip()
-
         for _, v in pairs(resources) do
             print(v)
             farmResource(v)
@@ -258,8 +253,6 @@ else
         print("finished mining proceeding to hop servers")
 
         toggleCO()
-
-	clip()
 
         teleportToOtherServer(localPlayer)
     end
