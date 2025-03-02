@@ -11,11 +11,35 @@ local JSON = loadstring(game:HttpGet("https://gist.githubusercontent.com/lvzixun
 
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
+local Clip = false
 
 local ts = game:GetService("TeleportService") 
 
 local resources = {}
 local resourcePositions = {}
+
+function noclip() 
+	Clip = false
+	
+	wait(0.1)
+	local function NoclipLoop()
+		if Clip == false and localPlayer.Character ~= nil then
+			for _, child in pairs(localPlayer.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
+					child.CanCollide = false
+				end
+			end
+		end
+	end
+	Noclipping = RunService.Stepped:Connect(NoclipLoop)
+end
+
+function clip()
+	if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clip = true
+end
 
 function teleportToOtherServer(player)
 	--local id = "cbff7bf6-1f90-47a3-b3f7-51d9d6cc67e1"
@@ -110,6 +134,8 @@ function farmResource(resource)
 	local resourceName = resource.Name
 	local resourcePosition = getPosition(resource)
 
+	noclip()
+
 	if (resource:FindFirstChildOfClass("ProximityPrompt") == nil) then
 		return
 	end
@@ -135,6 +161,8 @@ function farmResource(resource)
 	if (resource:FindFirstChildOfClass("ProximityPrompt") ~= nil) then
 		farmResource(resource)
 	end
+
+	clip()
 end
 
 function clickRandomServer()
