@@ -1,13 +1,9 @@
-if IY_LOADED then
-    error("Script is already running!", 0)
-    return
-end
-
-pcall(function() getgenv().IY_LOADED = true end)
-
 if not game:IsLoaded() then
+    print("waiting")
     game.Loaded:Wait()
 end
+
+print("Loaded")
 
 local workspace = game.Workspace
 local tweenService = game:GetService("TweenService")
@@ -33,7 +29,7 @@ function teleportToOtherServer(player)
 		teleportToOtherServer(player)
 	end
 
-	queue_on_teleport("loadstring(game:HttpGet(https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua))()")
+	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua'))()")
 
 	ts:TeleportToPlaceInstance(game.PlaceId, tbl.data[math.random(1, tableLength(tbl))]["id"], player) 
 end
@@ -60,8 +56,6 @@ function getResources(resourceName)
 	local harvestables = workspace.Harvestable:GetChildren()
 	local resourceTable = {}
 	local playerPosition = getPlayerPosition(localPlayer)
-	
-	if playerPosition == nil then return end
 
 	for _, obj in pairs(harvestables) do
 		if (obj.Name == resourceName and obj:FindFirstChildOfClass("ProximityPrompt") ~= nil) then
@@ -148,6 +142,8 @@ end
 local noFallDmgCo = coroutine.create(function()
 	local players = game:GetService("Players")
 	local localPlayer = players.LocalPlayer
+	
+	if localPlayer.Character == nil then return end
 
 	while task.wait(0.005) do
 		if (localPlayer:GetAttribute("CO") == false) then
@@ -159,6 +155,7 @@ end)
 
 -- Create the attribute to turn on and off coroutine
 function toggleCO()
+    if (localPlayer == nil) then return end
 	if (localPlayer:GetAttribute("CO") == false or localPlayer:GetAttribute("CO") == nil) then
 		coroutine.resume(noFallDmgCo)
 		localPlayer:SetAttribute("CO", true)
@@ -167,7 +164,7 @@ function toggleCO()
 	end
 end
 
-if (localPlayer.PlayerGui:FindFirstChild("Menu") ~= nil) then
+if (localPlayer.PlayerGui:WaitForChild("Menu", 10) ~= nil) then
     local args = {
         [1] = {
             ["config"] = "start_screen"
