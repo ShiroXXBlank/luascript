@@ -46,19 +46,22 @@ function teleportToOtherServer(player)
 	--local id = "cbff7bf6-1f90-47a3-b3f7-51d9d6cc67e1"
 
 	tweenTeleport(Vector3.new(-361, 375, -628), 100)
+	
+	print("Starting teleport to other server")
 
 	local jsonHTTP = game:HttpGet("https://games.roblox.com/v1/games/99995671928896/servers/public?limit=100&excludeFullGames=true&sortOrder=1")
 
 	local tbl = JSON:decode(jsonHTTP)
 
 	if (tbl.errors ~= nil) then
+	    error("Too many requests restarting teleport in 20 seconds")
 		task.wait(20)
 		teleportToOtherServer(player)
 	end
 
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/ShiroXXBlank/luascript/refs/heads/main/lastVersion.lua'))()")
 
-	ts:TeleportToPlaceInstance(game.PlaceId, tbl.data[math.random(5, #tbl)]["id"], player) 
+	ts:TeleportToPlaceInstance(game.PlaceId, tbl.data[math.random(5, tableLength(tbl.data))]["id"], player) 
 end
 
 function distance(obj1, obj2)
